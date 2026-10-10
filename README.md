@@ -1,3 +1,45 @@
+<!-- ELLMSHA FORK INTRO -->
+# Open Computer Use — eLLMsha integration fork
+
+**Native desktop automation for macOS, Linux and Windows.**
+
+| Provenance | Value |
+| --- | --- |
+| Original project | [Open Computer Use](https://github.com/iFurySt/open-codex-computer-use) |
+| Upstream baseline | `0.3.6` |
+| Baseline revision | `83a521e546102564efd002f61a6763912081e5c7` |
+| Harness patch label | 0 |
+
+## Why this fork exists
+
+Maintained integration fork bundled through the eLLMsha Computer Use plugin.
+
+```mermaid
+flowchart LR
+  Harness[eLLMsha harness] --> Component[Open Computer Use]
+  Component --> Work[Project work]
+```
+
+## Build and integration
+
+Use the parent `scripts/prepare-open-computer-use.js`. macOS needs Swift/Xcode tools for builds; Linux/Windows need Go. OS permissions remain explicit.
+
+The parent repository's installer and integration checks are authoritative for the bundled product. A passing upstream test suite alone does not prove eLLMsha integration acceptance. This local documentation update does not publish a release or make unpublished revisions available remotely.
+
+## Contributing
+
+Keep changes focused, preserve upstream licenses and notices, and separate an upstream version update from a harness patch. Record both in the parent application's About provenance. Do not commit credentials, user profiles or commercial project contents. Validate behavior on the platform being changed.
+
+## License and credits
+
+See [LICENSE](LICENSE). Original authors and their license terms remain unchanged. **Moroz Inc.** maintains the eLLMsha integration.
+
+---
+
+## Upstream documentation
+
+<!-- END ELLMSHA FORK INTRO -->
+
 # open-computer-use
 
 [![English](https://img.shields.io/badge/English-Click-yellow)](./README.md)
