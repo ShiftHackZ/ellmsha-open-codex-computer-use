@@ -1,5 +1,14 @@
 import Foundation
 
+// Unlike type_text, set_value intentionally accepts an empty string to clear
+// a field. A missing, null, or non-string value is still invalid.
+func requiredSetValueArgument(_ arguments: [String: Any]) throws -> String {
+    guard let value = arguments["value"] as? String else {
+        throw ComputerUseError.missingArgument("value")
+    }
+    return value
+}
+
 func normalizedElementIndexArgument(_ value: Any?) -> String? {
     if let string = value as? String {
         return string.isEmpty ? nil : string
@@ -101,7 +110,7 @@ public final class ComputerUseToolDispatcher {
             return try service.setValue(
                 app: requireString("app", in: arguments),
                 elementIndex: requireElementIndex(in: arguments),
-                value: requireString("value", in: arguments)
+                value: requiredSetValueArgument(arguments)
             )
         default:
             throw ComputerUseError.unsupportedTool(name)

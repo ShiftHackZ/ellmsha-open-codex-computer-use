@@ -704,6 +704,16 @@ final class OpenComputerUseKitTests: XCTestCase {
         XCTAssertEqual(emptyResult.primaryText, "Missing required argument: text")
     }
 
+    func testSetValueAcceptsClearingButRejectsMissingOrWrongType() throws {
+        XCTAssertEqual(try requiredSetValueArgument(["value": ""]), "")
+        XCTAssertEqual(try requiredSetValueArgument(["value": "  hello  "]), "  hello  ")
+        for arguments: [String: Any] in [[:], ["value": NSNull()], ["value": 42]] {
+            XCTAssertThrowsError(try requiredSetValueArgument(arguments)) { error in
+                XCTAssertEqual((error as? ComputerUseError)?.errorDescription, "Missing required argument: value")
+            }
+        }
+    }
+
     func testTypeTextUnicodeChunksPreserveGraphemeClusters() {
         let text = "（ocu发的）👩🏽‍💻e\u{301}𠀀"
         let chunks = InputSimulation.keyboardUnicodeChunks(for: text, maxUTF16Units: 8)
